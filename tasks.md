@@ -6,8 +6,8 @@ This file tracks all implementation tasks derived from [SPEC.md](./SPEC.md). Eac
 
 ## Phase 1: Project Scaffolding and Core Types
 
-- [ ] **Install runtime dependency `semver`** — Add `semver` (and `@types/semver`) to `package.json`. This is the only runtime dependency. | Status: not_done
-- [ ] **Install dev dependencies** — Add `vitest`, `typescript`, and `eslint` as dev dependencies (confirm versions and ensure vitest config works with `npm run test`). | Status: not_done
+- [x] **Install runtime dependency `semver`** — Add `semver` (and `@types/semver`) to `package.json`. This is the only runtime dependency. | Status: done
+- [x] **Install dev dependencies** — Add `vitest`, `typescript`, and `eslint` as dev dependencies (confirm versions and ensure vitest config works with `npm run test`). | Status: done
 - [ ] **Add `bin` entry to package.json** — Add `"bin": { "prompt-version": "./bin/prompt-version.js" }` to `package.json` so the CLI binary is registered on install. | Status: not_done
 - [ ] **Create `bin/prompt-version.js`** — Create the CLI binary entry point file with `#!/usr/bin/env node` shebang that imports and runs `../dist/cli.js`. | Status: not_done
 - [ ] **Define all TypeScript types in `src/types.ts`** — Implement all type definitions from SPEC Section 7: `RegistryConfig`, `LifecycleState`, `ContentFormat`, `PromptMessage`, `VersionMetadata`, `PromptInfo`, `ResolvedPrompt`, `GetPromptOptions`, `BumpOptions`, `LockResolution`, and the `PromptRegistry` interface. | Status: not_done
@@ -26,11 +26,11 @@ This file tracks all implementation tasks derived from [SPEC.md](./SPEC.md). Eac
 
 ## Phase 3: Storage Layer
 
-- [ ] **Implement `src/storage/directory.ts` — directory management** — Implement functions for: creating the registry root directory, creating prompt directories (`<registry>/<name>/`), creating version directories (`<registry>/<name>/<version>/`), path resolution for all file types (prompt content, meta.json, CHANGELOG.md), and checking directory existence. | Status: not_done
-- [ ] **Implement `src/storage/content-writer.ts` — write prompt content** — Write prompt content files to version directories. Support three formats: markdown (`.md`), plain text (`.txt`), and JSON message arrays (`.json`). Determine file extension from `ContentFormat`. | Status: not_done
+- [x] **Implement `src/storage/directory.ts` — directory management** — Implement functions for: creating the registry root directory, creating prompt directories (`<registry>/<name>/`), creating version directories (`<registry>/<name>/<version>/`), path resolution for all file types (prompt content, meta.json, CHANGELOG.md), and checking directory existence. | Status: done
+- [x] **Implement `src/storage/content-writer.ts` — write prompt content** — Write prompt content files to version directories. Support three formats: markdown (`.md`), plain text (`.txt`), and JSON message arrays (`.json`). Determine file extension from `ContentFormat`. | Status: done
 - [ ] **Implement `src/storage/content-reader.ts` — read prompt content** — Read prompt content files from version directories. Return raw string for markdown/text. For JSON message arrays, read the file as string and parse into `PromptMessage[]`. Handle UTF-8 encoding. | Status: not_done
-- [ ] **Implement `src/storage/meta-writer.ts` — write meta.json** — Write `meta.json` files to version directories with the full `VersionMetadata` structure as specified in SPEC Section 5. | Status: not_done
-- [ ] **Implement `src/storage/meta-reader.ts` — read meta.json** — Read and parse `meta.json` files from version directories. Deserialize into `VersionMetadata`. | Status: not_done
+- [x] **Implement `src/storage/meta-writer.ts` — write meta.json** — Write `meta.json` files to version directories with the full `VersionMetadata` structure as specified in SPEC Section 5. | Status: done
+- [x] **Implement `src/storage/meta-reader.ts` — read meta.json** — Read and parse `meta.json` files from version directories. Deserialize into `VersionMetadata`. | Status: done
 - [ ] **Implement `src/storage/hash.ts` — SHA-256 content hashing** — Implement content hashing using `node:crypto.createHash('sha256')`. Hash the raw content file bytes and return `sha256:<hex>` format string. Used for lock file integrity verification. | Status: not_done
 - [ ] **Implement `src/storage/index.ts` — storage entry point** — Re-export all storage module functions as a unified storage API. | Status: not_done
 
