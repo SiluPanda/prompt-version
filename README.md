@@ -3,6 +3,7 @@
 Local-first, git-friendly prompt versioning with semver.
 
 [![npm version](https://img.shields.io/npm/v/prompt-version.svg)](https://www.npmjs.com/package/prompt-version)
+[![npm downloads](https://img.shields.io/npm/dt/prompt-version.svg)](https://www.npmjs.com/package/prompt-version)
 [![license](https://img.shields.io/npm/l/prompt-version.svg)](https://github.com/SiluPanda/prompt-version/blob/master/LICENSE)
 [![node](https://img.shields.io/node/v/prompt-version.svg)](https://nodejs.org)
 
