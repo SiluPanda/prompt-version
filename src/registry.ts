@@ -118,6 +118,7 @@ export function createRegistry(config: RegistryConfig): PromptRegistry {
       writeContent(registryDir, name, newVersion, content, format)
 
       const newMeta: VersionMetadata = {
+        ...oldMeta,
         state: options.state ?? 'draft',
         createdAt: new Date().toISOString(),
         author: options.author ?? oldMeta.author,

@@ -310,3 +310,33 @@ describe('listVersions()', () => {
     expect(versions.sort()).toEqual(['1.0.0', '1.1.0', '2.0.0'])
   })
 })
+
+describe('regression: bump preserves tags and custom metadata', () => {
+  it('bump() preserves tags from the source version', async () => {
+    const dir = makeTmpDir(); tmpDirs.push(dir)
+    const reg = createRegistry({ registryDir: dir, author: 'tester' })
+    await reg.createPrompt('tagged', '1.0.0', 'Hello', { tags: ['prod', 'important'] })
+    await reg.publish('tagged', '1.0.0')
+
+    const newVer = await reg.bump('tagged', '1.0.0', { level: 'patch' })
+    const resolved = await reg.getPrompt('tagged', newVer, { draft: true })
+
+    expect(resolved.metadata.tags).toEqual(['prod', 'important'])
+  })
+
+  it('bump() preserves custom metadata fields', async () => {
+    const dir = makeTmpDir(); tmpDirs.push(dir)
+    const reg = createRegistry({ registryDir: dir, author: 'tester' })
+    await reg.createPrompt('custom-meta', '1.0.0', 'Hello')
+
+    // Manually add custom field
+    const { readMeta, writeMeta } = await import('../storage')
+    const meta = readMeta(dir, 'custom-meta', '1.0.0')
+    writeMeta(dir, 'custom-meta', '1.0.0', { ...meta, customField: 'preserved' })
+
+    const newVer = await reg.bump('custom-meta', '1.0.0', { level: 'minor' })
+    const resolved = await reg.getPrompt('custom-meta', newVer, { draft: true })
+
+    expect((resolved.metadata as Record<string, unknown>)['customField']).toBe('preserved')
+  })
+})

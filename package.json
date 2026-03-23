@@ -1,6 +1,6 @@
 {
   "name": "prompt-version",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Local-first git-friendly prompt versioning with semver",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

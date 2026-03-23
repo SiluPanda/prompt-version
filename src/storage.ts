@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSync } from 'fs'
 import { join } from 'path'
 import type { VersionMetadata, ContentFormat } from './types'
+import { PromptVersionError } from './errors'
 
 export function promptDir(registryDir: string, name: string): string {
   return join(registryDir, name)
@@ -48,7 +49,7 @@ export function readContent(
       return { content: readFileSync(filepath, 'utf-8'), format }
     }
   }
-  throw new Error(`No content file found in ${dir}`)
+  throw new PromptVersionError(`No content file found in ${dir}`, 'CONTENT_NOT_FOUND')
 }
 
 export function writeMeta(
